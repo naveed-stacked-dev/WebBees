@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
-import { IoHomeOutline, IoInformationCircleOutline, IoRocketOutline, IoCodeSlashOutline, IoSchoolOutline, IoMailOutline } from 'react-icons/io5';
+import { IoHomeOutline, IoInformationCircleOutline, IoRocketOutline, IoCodeSlashOutline, IoSchoolOutline, IoMailOutline, IoCloseOutline, IoMenuOutline } from 'react-icons/io5';
 
 const menuItems = [
   { title: 'Home', href: '#home', icon: <IoHomeOutline />, gradientFrom: '#00ff9f', gradientTo: '#00ffff' },
@@ -14,6 +14,7 @@ const menuItems = [
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,13 +30,13 @@ export function Navbar() {
       animate={{ y: 0 }}
       transition={{ type: 'spring', stiffness: 100, damping: 20 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-black/80 backdrop-blur-lg border-b border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.5)] py-2' : 'bg-transparent py-4'
+        scrolled || isMobileMenuOpen ? 'bg-black/90 backdrop-blur-lg border-b border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.5)] py-2' : 'bg-transparent py-4'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         
         {/* Logo and Text */}
-        <a href="#home" className="flex items-center gap-3 group">
+        <a href="#home" className="flex items-center gap-3 group" onClick={() => setIsMobileMenuOpen(false)}>
           <img src="/logo.png" alt="WebBees Logo" className="w-10 h-10 object-contain group-hover:scale-110 transition-transform drop-shadow-[0_0_8px_rgba(0,255,159,0.8)]" />
           <div className="text-2xl font-black tracking-tighter">
             <span className="text-white drop-shadow-md">Web</span>
@@ -76,10 +77,48 @@ export function Navbar() {
         </div>
 
         {/* Mobile Menu Toggle */}
-        <button className="md:hidden text-white hover:text-primary transition-colors">
-           <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" /></svg>
+        <button 
+          className="md:hidden text-white hover:text-primary transition-colors focus:outline-none"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
+           {isMobileMenuOpen ? <IoCloseOutline className="w-8 h-8" /> : <IoMenuOutline className="w-8 h-8" />}
         </button>
       </div>
+
+      {/* Mobile Menu Dropdown */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden border-t border-white/10 bg-black/95 backdrop-blur-xl overflow-hidden"
+          >
+            <ul className="px-6 py-4 flex flex-col gap-4">
+              {menuItems.map(({ title, href, icon, gradientFrom, gradientTo }, idx) => (
+                <li key={idx}>
+                  <a 
+                    href={href} 
+                    className="flex items-center gap-4 text-white hover:text-primary transition-colors p-2 rounded-lg hover:bg-white/5"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <span 
+                      className="text-2xl p-2 rounded-lg"
+                      style={{ 
+                        background: `linear-gradient(45deg, ${gradientFrom}30, ${gradientTo}30)`,
+                        color: gradientFrom 
+                      }}
+                    >
+                      {icon}
+                    </span>
+                    <span className="font-bold tracking-wide uppercase">{title}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.nav>
   );
 }
