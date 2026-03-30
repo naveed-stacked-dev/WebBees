@@ -4,13 +4,10 @@ import { ChevronLeft, ChevronRight, Maximize2 } from 'lucide-react';
 
 // Programmatically generate 25 gallery items based on the assets
 const galleryItems = Array.from({ length: 25 }, (_, i) => {
-    const id = i + 1;
-    let ext = 'jpg';
-    if ([5, 18, 23].includes(id)) ext = 'jpeg';
-    
+    const id = i + 1;    
     return {
         id,
-        url: `/classes-images/${id}.${ext}`,
+        url: `/classes-images/${id}.jpg`,
         title: `Session ${id}`,
         desc: `High-intensity development and collaborative learning from our WebBees curriculum.`
     };
@@ -31,18 +28,18 @@ export function PreviousClasses() {
   };
 
   return (
-    <section id="gallery" className="relative h-screen min-h-[800px] flex flex-col justify-center bg-black/40 border-t border-white/5 overflow-hidden">
+    <section id="gallery" className="relative min-h-screen py-24 flex flex-col justify-center bg-black/40 border-t border-white/5 overflow-hidden">
        {/* Ambient Glow */}
        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[120px] pointer-events-none" />
 
-       <div className="max-w-7xl mx-auto px-6 relative z-10 w-full py-12">
+       <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-6">
              <div>
                 <motion.h2 
                    initial={{ opacity: 0, x: -20 }}
                    whileInView={{ opacity: 1, x: 0 }}
-                   className="text-3xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary via-white to-secondary mb-2"
+                   className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary via-white to-secondary mb-2 pb-2 leading-tight w-full inline-block"
                 >
                    Previous Classes
                 </motion.h2>
@@ -91,11 +88,13 @@ export function PreviousClasses() {
                          animate={{ opacity: 1, y: 0 }}
                          transition={{ delay: idx * 0.05 }}
                          onClick={() => setSelectedImage(item)}
-                         className="group relative h-40 sm:h-52 rounded-xl overflow-hidden border border-white/10 bg-gray-900/40 backdrop-blur-sm cursor-pointer"
+                         className="group relative h-40 sm:h-52 rounded-xl overflow-hidden border border-white/10 bg-gray-900/40 cursor-pointer"
                       >
                          <img 
                             src={item.url} 
                             alt={item.title} 
+                            loading="lazy"
+                            decoding="async"
                             className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110"
                          />
                          

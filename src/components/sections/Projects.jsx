@@ -33,7 +33,7 @@ const projects = [
 
 export function Projects() {
   return (
-    <section id="projects" className="relative min-h-screen py-24 bg-black/60 backdrop-blur-md">
+    <section id="projects" className="relative min-h-screen py-24 bg-black/80">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-white">Featured <span className="gradient-text">Projects</span></h2>
@@ -60,6 +60,8 @@ export function Projects() {
                 <img 
                   src={project.image} 
                   alt={project.title} 
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out"
                 />
               </div>

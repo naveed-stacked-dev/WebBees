@@ -6,7 +6,7 @@ export function About() {
   const ROBOT_SCENE_URL = "https://prod.spline.design/PyzDhpQ9E5f1E3MT/scene.splinecode";
 
   return (
-    <section id="about" className="relative min-h-screen py-20 overflow-hidden bg-black/40 backdrop-blur-sm border-t border-white/10">
+    <section id="about" className="relative min-h-screen py-20 overflow-hidden bg-black/70 border-t border-white/10">
       <div className="max-w-7xl mx-auto px-6 h-full flex flex-col lg:flex-row items-center justify-between gap-12 pt-10">
         
         {/* Left Side: Text / Info */}
@@ -21,7 +21,7 @@ export function About() {
             <h3 className="text-4xl md:text-5xl font-bold mb-6">Building the <span className="gradient-text">Future</span> of Developers</h3>
             
             <p className="text-lg text-muted-foreground mb-4">
-              I am Syed Naveedullah, a passionate developer and mentor. WebBees is not just a platform; it's a movement to bridge the gap between traditional education and industry requirements.
+              I am Syed Naveedullah, a passionate developer and mentor. I have strong industry experience working on real-world applications as a <span className="text-primary">Software Developer and Cloud Engineer at Bitstek</span>. WebBees is not just a platform; it's a movement to bridge the gap between traditional education and industry requirements.
             </p>
             <p className="text-lg text-muted-foreground">
               Our mission is to make students industry-ready by providing hands-on mentorship, real-world project experience, and a supportive community of aspiring tech leaders.
