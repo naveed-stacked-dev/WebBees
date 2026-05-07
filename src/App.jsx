@@ -15,6 +15,8 @@ import { Classes } from './components/sections/Classes';
 import { PreviousClasses } from './components/sections/PreviousClasses';
 import { Testimonials } from './components/sections/Testimonials';
 import { Contact } from './components/sections/Contact';
+import { Catalog } from './components/sections/Catalog';
+import { WebDevBanner } from './components/sections/Webdevbanner';
 
 import { UserCircle, Server } from 'lucide-react';
 
@@ -32,6 +34,10 @@ function Home() {
       <main>
         <Hero />
         <About />
+
+        {/* Web Dev Banner — shows we also build websites */}
+        <WebDevBanner />
+
         <Startup />
         <Projects />
         
@@ -68,6 +74,7 @@ function App() {
       <CyberCursor />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/catalog" element={<Catalog />} />
         <Route path="/dashboard" element={<Dashboard onBack={() => {
             if (window.history.length > 2) {
                window.history.back();
